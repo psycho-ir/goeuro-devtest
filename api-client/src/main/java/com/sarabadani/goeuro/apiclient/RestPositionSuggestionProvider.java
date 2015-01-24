@@ -18,9 +18,9 @@ public class RestPositionSuggestionProvider implements PositionSuggestionProvier
 
 
     @Override
-    public List<PositionSuggestion> provide() {
+    public List<PositionSuggestion> provide(String name) {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.addMixIn(com.sarabadani.goeuro.apiclient.PositionSuggestion.class,PositionSuggestionMixin.class);
+        mapper.addMixIn(com.sarabadani.goeuro.apiclient.PositionSuggestion.class, PositionSuggestionMixin.class);
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
         messageConverter.setObjectMapper(mapper);
         List<HttpMessageConverter<?>> convertors = new ArrayList<HttpMessageConverter<?>>();
@@ -28,14 +28,14 @@ public class RestPositionSuggestionProvider implements PositionSuggestionProvier
 
         RestTemplate template = new RestTemplate();
         template.setMessageConverters(convertors);
-//        template.getforOb
-        com.sarabadani.goeuro.apiclient.PositionSuggestion[] result = template.getForObject("http://api.goeuro.com/api/v2/position/suggest/en/Berlin", com.sarabadani.goeuro.apiclient.PositionSuggestion[].class);
+        final String url = String.format("http://api.goeuro.com/api/v2/position/suggest/en/%s", name);
+        com.sarabadani.goeuro.apiclient.PositionSuggestion[] result = template.getForObject(url, com.sarabadani.goeuro.apiclient.PositionSuggestion[].class);
         System.out.println(Arrays.asList(result));
-        return  null;
+        return null;
     }
 
     public static void main(String[] args) {
-        new RestPositionSuggestionProvider().provide();
+        new RestPositionSuggestionProvider().provide("B");
     }
 
 }

@@ -6,5 +6,5 @@ import java.util.List;
  * Created by SOROOSH on 1/22/15.
  */
 public interface PositionSuggestionProvier {
-    List<PositionSuggestion> provide();
+    List<PositionSuggestion> provide(String townName);
 }
