@@ -1,6 +1,7 @@
 package com.sarabadani.goeuro.spec;
 
-import java.io.InputStream;
+import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
+
 import java.util.List;
 import java.util.stream.Stream;
 

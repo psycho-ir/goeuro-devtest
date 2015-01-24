@@ -1,22 +1,21 @@
-package com.sarabadani.goeuro.apiclient;
+package com.sarabadani.goeuro.spec.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Created by SOROOSH on 1/22/15.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class PositionSuggestion {
-
     private final String id;
     private final String key;
     private final String name;
     private final String fullName;
-    private final String iataAirPort;
+    private final String iataAirPortCode;
     private final String type;
     private final String country;
     private final String locationId;
-
+    private final GeoPosition position;
 
     public String getId() {
         return id;
@@ -34,8 +33,8 @@ public class PositionSuggestion {
         return fullName;
     }
 
-    public String getIataAirPort() {
-        return iataAirPort;
+    public String getIataAirPortCode() {
+        return iataAirPortCode;
     }
 
     public String getType() {
@@ -50,18 +49,17 @@ public class PositionSuggestion {
         return locationId;
     }
 
-    public PositionSuggestion(String id, String key, String name, String fullName, String iataAirPort, String type, String country, String locationId) {
-
+    public PositionSuggestion(String id, String key, String name, String fullName, String iataAirPortCode, String type, String country, String locationId, GeoPosition position) {
         this.id = id;
         this.key = key;
         this.name = name;
         this.fullName = fullName;
-        this.iataAirPort = iataAirPort;
+        this.iataAirPortCode = iataAirPortCode;
         this.type = type;
         this.country = country;
         this.locationId = locationId;
+        this.position = position;
     }
-
 
     @Override
     public String toString() {
@@ -70,10 +68,11 @@ public class PositionSuggestion {
                 ", key='" + key + '\'' +
                 ", name='" + name + '\'' +
                 ", fullName='" + fullName + '\'' +
-                ", iataAirPort='" + iataAirPort + '\'' +
+                ", iataAirPortCode='" + iataAirPortCode + '\'' +
                 ", type='" + type + '\'' +
                 ", country='" + country + '\'' +
                 ", locationId='" + locationId + '\'' +
+                ", postion= '" + position.toString() + '\'' +
                 '}';
     }
 }

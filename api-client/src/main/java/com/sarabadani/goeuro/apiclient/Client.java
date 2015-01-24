@@ -1,9 +1,9 @@
 package com.sarabadani.goeuro.apiclient;
 
-import org.springframework.http.ResponseEntity;
+import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Arrays;
 
 
 /**

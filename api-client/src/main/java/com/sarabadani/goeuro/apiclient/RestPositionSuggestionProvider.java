@@ -1,8 +1,11 @@
 package com.sarabadani.goeuro.apiclient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sarabadani.goeuro.spec.*;
-import com.sarabadani.goeuro.spec.PositionSuggestion;
+import com.sarabadani.goeuro.apiclient.mixins.GeoPositionMixin;
+import com.sarabadani.goeuro.apiclient.mixins.PositionSuggestionMixin;
+import com.sarabadani.goeuro.spec.PositionSuggestionProvier;
+import com.sarabadani.goeuro.spec.vo.GeoPosition;
+import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -20,7 +23,8 @@ public class RestPositionSuggestionProvider implements PositionSuggestionProvier
     @Override
     public List<PositionSuggestion> provide(String name) {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.addMixIn(com.sarabadani.goeuro.apiclient.PositionSuggestion.class, PositionSuggestionMixin.class);
+        mapper.addMixIn(PositionSuggestion.class, PositionSuggestionMixin.class);
+        mapper.addMixIn(GeoPosition.class, GeoPositionMixin.class);
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
         messageConverter.setObjectMapper(mapper);
         List<HttpMessageConverter<?>> convertors = new ArrayList<HttpMessageConverter<?>>();
@@ -29,13 +33,13 @@ public class RestPositionSuggestionProvider implements PositionSuggestionProvier
         RestTemplate template = new RestTemplate();
         template.setMessageConverters(convertors);
         final String url = String.format("http://api.goeuro.com/api/v2/position/suggest/en/%s", name);
-        com.sarabadani.goeuro.apiclient.PositionSuggestion[] result = template.getForObject(url, com.sarabadani.goeuro.apiclient.PositionSuggestion[].class);
+        PositionSuggestion[] result = template.getForObject(url, PositionSuggestion[].class);
         System.out.println(Arrays.asList(result));
         return null;
     }
 
     public static void main(String[] args) {
-        new RestPositionSuggestionProvider().provide("B");
+        new RestPositionSuggestionProvider().provide("Berlin");
     }
 
 }

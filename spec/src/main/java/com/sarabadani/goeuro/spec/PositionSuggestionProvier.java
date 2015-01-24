@@ -1,5 +1,7 @@
 package com.sarabadani.goeuro.spec;
 
+import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
+
 import java.util.List;
 
 /**
