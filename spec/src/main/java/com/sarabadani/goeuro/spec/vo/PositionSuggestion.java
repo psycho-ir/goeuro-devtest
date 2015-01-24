@@ -5,7 +5,7 @@ package com.sarabadani.goeuro.spec.vo;
 /**
  * Created by SOROOSH on 1/22/15.
  */
-//@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class PositionSuggestion {
     private final String id;
     private final String key;
@@ -48,6 +48,8 @@ public class PositionSuggestion {
     public String getLocationId() {
         return locationId;
     }
+
+    public GeoPosition getPosition() { return position; }
 
     public PositionSuggestion(String id, String key, String name, String fullName, String iataAirPortCode, String type, String country, String locationId, GeoPosition position) {
         this.id = id;
