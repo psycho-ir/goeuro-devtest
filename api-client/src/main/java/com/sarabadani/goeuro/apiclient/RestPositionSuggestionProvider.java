@@ -34,8 +34,7 @@ public class RestPositionSuggestionProvider implements PositionSuggestionProvier
         template.setMessageConverters(convertors);
         final String url = String.format("http://api.goeuro.com/api/v2/position/suggest/en/%s", name);
         PositionSuggestion[] result = template.getForObject(url, PositionSuggestion[].class);
-        System.out.println(Arrays.asList(result));
-        return null;
+        return Arrays.asList(result);
     }
 
     public static void main(String[] args) {
