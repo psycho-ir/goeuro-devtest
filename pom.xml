@@ -12,6 +12,13 @@
         <jdk.version>1.7</jdk.version>
     </properties>
 
+    <modules>
+        <module>spec</module>
+        <module>api-client</module>
+        <module>csv-output-generator</module>
+        <module>executable</module>
+    </modules>
+
     <build>
         <plugins>
             <plugin>
@@ -26,12 +33,12 @@
         </plugins>
     </build>
 
-    <modules>
-        <module>spec</module>
-        <module>api-client</module>
-        <module>csv-output-generator</module>
-        <module>executable</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+    </dependencies>
 
 </project>
