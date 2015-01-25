@@ -3,7 +3,7 @@ package com.sarabadani.goeuro.apiclient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sarabadani.goeuro.apiclient.mixins.GeoPositionMixin;
 import com.sarabadani.goeuro.apiclient.mixins.PositionSuggestionMixin;
-import com.sarabadani.goeuro.spec.PositionSuggestionProvier;
+import com.sarabadani.goeuro.spec.PositionSuggestionProvider;
 import com.sarabadani.goeuro.spec.vo.GeoPosition;
 import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by SOROOSH on 1/22/15.
  */
-public class RestPositionSuggestionProvider implements PositionSuggestionProvier {
+public class RestPositionSuggestionProvider implements PositionSuggestionProvider {
 
 
     @Override
