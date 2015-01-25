@@ -15,14 +15,38 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by SOROOSH on 1/22/15.
+ * Rest Position Suggestionimplementation of {@link com.sarabadani.goeuro.spec.PositionSuggestionProvider}.
+ * This implementation uses Spring Rest Template to communicate with Rest API (http://api.goeuro.com/api/v2/position/suggest/en/{CITY_NAME})
+ *
+ * @author Soroosh Sarabadani
+ * @see com.sarabadani.goeuro.spec.OutputGenerator
  */
 public class RestPositionSuggestionProvider implements PositionSuggestionProvider {
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final RestTemplate template;
+    private final String apiUrl;
+    //todo: Making API_URL configurable (eg. by using properties file) is a good practice. But i think it is not needed for this task.
+    private static final String API_URL = "http://api.goeuro.com/api/v2/position/suggest/en/%s";
 
+    public RestPositionSuggestionProvider() {
+        this.apiUrl = API_URL;
+        mapper.addMixIn(PositionSuggestion.class, PositionSuggestionMixin.class);
+        mapper.addMixIn(GeoPosition.class, GeoPositionMixin.class);
+        MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+        messageConverter.setObjectMapper(mapper);
+        List<HttpMessageConverter<?>> convertors = new ArrayList<HttpMessageConverter<?>>();
+        convertors.add(messageConverter);
+        this.template = new RestTemplate();
+        template.setMessageConverters(convertors);
+    }
 
-    @Override
-    public List<PositionSuggestion> provide(String name) {
-        ObjectMapper mapper = new ObjectMapper();
+    public RestPositionSuggestionProvider(String apiUrl) {
+
+        if (apiUrl == null) {
+            throw new IllegalArgumentException("apiUrl cannot be null");
+        }
+        this.apiUrl = API_URL;
+
         mapper.addMixIn(PositionSuggestion.class, PositionSuggestionMixin.class);
         mapper.addMixIn(GeoPosition.class, GeoPositionMixin.class);
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
@@ -30,15 +54,15 @@ public class RestPositionSuggestionProvider implements PositionSuggestionProvide
         List<HttpMessageConverter<?>> convertors = new ArrayList<HttpMessageConverter<?>>();
         convertors.add(messageConverter);
 
-        RestTemplate template = new RestTemplate();
+        this.template = new RestTemplate();
         template.setMessageConverters(convertors);
-        final String url = String.format("http://api.goeuro.com/api/v2/position/suggest/en/%s", name);
+    }
+
+
+    @Override
+    public List<PositionSuggestion> provide(String name) {
+        final String url = String.format(this.apiUrl, name);
         PositionSuggestion[] result = template.getForObject(url, PositionSuggestion[].class);
         return Arrays.asList(result);
     }
-
-    public static void main(String[] args) {
-        new RestPositionSuggestionProvider().provide("Berlin");
-    }
-
 }
