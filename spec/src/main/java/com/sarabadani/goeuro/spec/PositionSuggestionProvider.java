@@ -5,7 +5,11 @@ import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
 import java.util.List;
 
 /**
- * Created by SOROOSH on 1/22/15.
+ * The standard of all position suggestion providers.
+ * Implementations should be able to return list of position suggestions which are correspond to passed town name.
+ *
+ * @author  Soroosh Sarabadani
+ *
  */
 public interface PositionSuggestionProvider {
     List<PositionSuggestion> provide(String townName);

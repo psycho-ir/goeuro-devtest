@@ -1,11 +1,13 @@
 package com.sarabadani.goeuro.spec.vo;
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Created by SOROOSH on 1/22/15.
+ * A Value object class to wrap position suggestions.
+ * This is a common class for Every implementation of specification.
+ *
+ * @author  Soroosh Sarabadani
+ *
  */
-
 public class PositionSuggestion {
     private final String id;
     private final String key;

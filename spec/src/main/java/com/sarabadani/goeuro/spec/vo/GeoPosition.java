@@ -1,9 +1,13 @@
 package com.sarabadani.goeuro.spec.vo;
 
 /**
- * Created by soroosh on 1/24/15.
+ * A Value object class to wrap geography positions.
+ * This is a common class for Every implementation of specification.
+ *
+ * @author  Soroosh Sarabadani
+  *
  */
-public class GeoPosition {
+public final class GeoPosition {
 
     private final String latitude;
     private final String longitude;
