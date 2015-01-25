@@ -5,6 +5,7 @@ import com.sarabadani.goeuro.output.generator.csv.CSVOutputGenerator;
 import com.sarabadani.goeuro.spec.OutputGenerator;
 import com.sarabadani.goeuro.spec.PositionSuggestionProvider;
 import com.sarabadani.goeuro.spec.vo.PositionSuggestion;
+import org.springframework.web.client.RestClientException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,12 +30,12 @@ public class Main {
             try (FileWriter fileWriter = new FileWriter("default_output.csv")) {
                 fileWriter.write(generatedCSV);
                 fileWriter.flush();
+                System.out.println("Ths CSV file generated. CSV_File_Name: default_output.csv");
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IOException | RestClientException e) {
             System.err.println(e.getMessage());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 
 
