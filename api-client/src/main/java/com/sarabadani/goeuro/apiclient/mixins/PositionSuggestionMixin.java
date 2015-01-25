@@ -20,30 +20,5 @@ public abstract class PositionSuggestionMixin {
                                    @JsonProperty("locationId") String locationId,
                                    @JsonProperty("geo_position")GeoPosition position) {
     }
-//
-//    @JsonProperty("_id")
-//    public abstract String getId();
-//
-//    @JsonProperty("key")
-//    public abstract String getKey();
-//
-//    @JsonProperty("name")
-//    public abstract String getName();
-//
-//    @JsonProperty("fullName")
-//    public abstract String getFullName();
-//
-//    @JsonProperty("iata_airport")
-//    public abstract String getIataAirPort();
-//
-//    @JsonProperty("type")
-//    public abstract String getType();
-//
-//    @JsonProperty("country")
-//    public abstract String getCountry();
-//
-//    @JsonProperty("locationId")
-//    public abstract String getLocationId();
-
 
 }
